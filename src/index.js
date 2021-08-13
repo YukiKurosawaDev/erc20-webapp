@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ThemeProvider } from 'styled-components'
+import { ModalProvider,light,dark, ResetCSS } from '@pancakeswap-libs/uikit'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+const ThemeProviderWrapper = (props) => {
+  //const [isDark] = 0;
+  return <ThemeProvider theme={light} {...props} />
+}
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProviderWrapper>
+    <ModalProvider>
+      <App />
+    </ModalProvider>
+    </ThemeProviderWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,24 +1,24 @@
 import logo from './logo.svg';
+import React, { lazy, Suspense } from 'react'
 import './App.css';
+import { Button, Text, ArrowDownIcon, Box, useModal, ResetCSS } from '@pancakeswap-libs/uikit'
+import { Router,Route } from 'react-router';
+import GlobalStyle from './style/Global.ts';
+import history from './routerHistory.ts';
+const Home = lazy(() => import('./views/Home/index.tsx'));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <ResetCSS></ResetCSS>
+      <GlobalStyle></GlobalStyle>
+      <Suspense fallback={<div></div>}>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      </Suspense>
+    </Router>
   );
 }
 
