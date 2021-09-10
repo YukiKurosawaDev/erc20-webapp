@@ -1,10 +1,16 @@
-import { Button, Text, ArrowDownIcon, Box, useModal } from '@pancakeswap-libs/uikit'
+import { Menu } from '@pancakeswap/uikit'
+import { languageList } from '../../config/localization/languages';
+import menus from '../../context/menu'
 
 const Home: React.FC = () => {
+	
+	function noop(){
+	}
+	
     return (
         <div>
-            <div>TEST OK!</div>
-            <Button>AAA</Button>
+           <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>
+		   </Menu>
         </div>
     )
 };

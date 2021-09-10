@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ThemeProvider } from 'styled-components'
-import { ModalProvider,light,dark, ResetCSS } from '@pancakeswap-libs/uikit'
+import { ModalProvider,light,dark, ResetCSS } from '@pancakeswap/uikit'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

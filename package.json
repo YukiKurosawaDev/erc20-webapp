@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@pancakeswap-libs/uikit": "^0.29.4",
+    "@pancakeswap/uikit": "^0.50.1",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
