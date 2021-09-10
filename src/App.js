@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React, { lazy, Suspense } from 'react'
 import './App.css';
-import { Button, Text, ArrowDownIcon, Box, useModal, ResetCSS } from '@pancakeswap/uikit'
+import { Button, Text, ArrowDownIcon, Box, useModal, ResetCSS } from '@yuki_kurosawa/uikit'
 import { Router,Route } from 'react-router';
 import GlobalStyle from './style/Global.ts';
 import history from './routerHistory.ts';

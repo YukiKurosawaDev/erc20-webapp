@@ -1,4 +1,4 @@
-import { MenuEntry } from '@pancakeswap/uikit'
+import { MenuEntry } from '@yuki_kurosawa/uikit'
 
 var menus:MenuEntry[]=[
     {

@@ -1,4 +1,4 @@
-import { Menu } from '@pancakeswap/uikit'
+import { Menu } from '@yuki_kurosawa/uikit'
 import { languageList } from '../../config/localization/languages';
 import menus from '../../context/menu'
 
