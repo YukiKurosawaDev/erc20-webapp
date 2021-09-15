@@ -2398,10 +2398,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@yuki_kurosawa/uikit@^0.51.0":
-  version "0.51.0"
-  resolved "https://registry.yarnpkg.com/@yuki_kurosawa/uikit/-/uikit-0.51.0.tgz#aa3717be02e0ab595158c54bfc217bc1217e884b"
-  integrity sha512-CmgMM7wsTZmGyTczkhjgLdA3SMejWtaHXtqOkJCymOV13zfJD7cRMV2sGldKQqNzzgpA8T6sq/o0qtcALqqqIg==
+"@yuki_kurosawa/uikit@^0.51.5":
+  version "0.51.5"
+  resolved "https://registry.yarnpkg.com/@yuki_kurosawa/uikit/-/uikit-0.51.5.tgz#abd0bba624cd931498925f2c25036fb13b6d704a"
+  integrity sha512-M1yoMDyc9UQOkK2smS0eGCM8y6MD9m/YBymJQ0EgXVaRe0Nl2kSRBUxFauIQQc3NYbhl67BXQP2rO56BB7Palg==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/lodash" "^4.14.168"
