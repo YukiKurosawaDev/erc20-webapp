@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ThemeProvider } from 'styled-components'
-import { ModalProvider,light,dark, ResetCSS } from '@yuki_kurosawa/uikit'
+import { ModalProvider,light } from '@yuki_kurosawa/uikit'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

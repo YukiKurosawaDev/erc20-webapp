@@ -1,16 +1,12 @@
-import { Menu } from '@yuki_kurosawa/uikit'
-import { languageList } from '../../config/localization/languages';
-import menus from '../../context/menu'
+import React from 'react';
+import NaviMenu from '../NaviMenu'
 
 const Home: React.FC = () => {
-	
-	function noop(){
-	}
-	
+	  
     return (
         <div>
-           <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>
-		   </Menu>
+           <NaviMenu>          
+		   </NaviMenu>
         </div>
     )
 };

@@ -1,0 +1,55 @@
+import { Menu } from '@yuki_kurosawa/uikit'
+import { languageList } from '../../config/localization/languages';
+import menus from '../../context/menu'
+import { useWeb3React, } from '@web3-react/core'
+import { InjectedConnector } from '@web3-react/injected-connector';
+import Web3 from 'web3';
+import React from 'react';
+import { useState } from 'react';
+import {BigNumber} from 'bignumber.js';
+
+const Home: React.FC = () => {
+	  
+	function noop(){
+        
+	}
+    
+    var [balance,setBalance]=useState<string>("");
+    const { activate, account, library, active, chainId, deactivate } = useWeb3React();
+    
+    function connect(){
+        
+        activate(new InjectedConnector({
+            supportedChainIds: [1,3,4,5,42,56,97]
+        })).then(()=>{
+            if(active && account != null)
+            {
+                console.log(account);
+                var web3:Web3=library;         
+                web3.eth.getBalance(account?.toString()).then((s)=>{
+                    var _balance=new BigNumber(s).div(new BigNumber("1000000000000000000")).toFixed(4); 
+                    var wei=([56,97].indexOf(chainId??1)>-1)?" BNB":" ETH"
+                    setBalance(_balance+wei);
+                });                
+            }
+        });        
+    };
+
+    function disconnect(){
+        deactivate();
+        setBalance("");
+    }
+	
+    return (
+        <div>
+           <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>
+                <span>{account}={balance}</span>
+                <br/>
+                <button onClick={connect}>Connect</button><br/>
+                <button onClick={disconnect}>Disconnect</button><br/>           
+		   </Menu>
+        </div>
+    )
+};
+
+export default Home;
