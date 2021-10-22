@@ -12,9 +12,9 @@ var menus:MenuEntry[]=[
       href: '/chara'
     },
     {
-      label: 'News',
+      label: 'Info',
       icon: 'InfoIcon',
-      href: '/news',
+      href: '/Info',
     },
     {
       label: 'Trade',

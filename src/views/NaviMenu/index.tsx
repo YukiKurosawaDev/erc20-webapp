@@ -9,11 +9,20 @@ const NaviMenu: React.FC<object> = ({children}) => {
 
     }
 
+    const divstyle : React.CSSProperties = {
+        width:'95%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginTop:'2.5%',
+    };
+
     return (
         <div>
-           <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>
-                {children}  
-		   </Menu>
+            <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>
+                <div style={divstyle}>
+                    {children}  
+                </div>
+		    </Menu>
         </div>
     )
 };

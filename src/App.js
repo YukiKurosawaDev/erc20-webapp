@@ -7,6 +7,10 @@ import history from './routerHistory.ts';
 import Web3 from 'web3';
 import { Web3ReactProvider } from '@web3-react/core'
 const Home = lazy(() => import('./views/Home/index.tsx'));
+const Characters = lazy(() => import('./views/Characters/index.tsx'));
+const Info = lazy(() => import('./views/Info/index.tsx'));
+const Swap = lazy(() => import('./views/Swap/index.tsx'));
+const About = lazy(() => import('./views/About/index.tsx'));
 
 
 function getLibrary(provider) {
@@ -20,9 +24,21 @@ function App({ Component, pageProps }) {
       <ResetCSS></ResetCSS>
       <GlobalStyle></GlobalStyle>
       <Suspense fallback={<div></div>}>
-      <Route path="/" exact>
-        <Home />
-      </Route>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/chara" exact>
+          <Characters />
+        </Route>
+        <Route path="/info" exact>
+          <Info />
+        </Route>
+        <Route path="/swap" exact>
+          <Swap />
+        </Route>
+        <Route path="/about" exact>
+          <About />
+        </Route>
       </Suspense>
     </Router>
   );
