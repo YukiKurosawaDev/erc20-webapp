@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import './App.css';
 import { ResetCSS } from '@yuki_kurosawa/uikit'
-import { Router,Route } from 'react-router';
+import { HashRouter,Route } from 'react-router-dom';
 import GlobalStyle from './style/Global.ts';
 import history from './routerHistory.ts';
 import Web3 from 'web3';
@@ -20,7 +20,7 @@ function getLibrary(provider) {
 
 function App({ Component, pageProps }) {
   return (
-    <Router history={history}>
+    <HashRouter history={history}>
       <ResetCSS></ResetCSS>
       <GlobalStyle></GlobalStyle>
       <Suspense fallback={<div></div>}>
@@ -40,7 +40,7 @@ function App({ Component, pageProps }) {
           <About />
         </Route>
       </Suspense>
-    </Router>
+    </HashRouter>
   );
 }
 
