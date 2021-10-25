@@ -29,7 +29,7 @@ var menus:MenuEntry[]=[
     {
       label: 'Github',
       icon: 'IfoIcon',
-      href: 'https://github.com/Takeya_Yuki',
+      href: 'https://github.com/YukiKurosawaDev',
     },    
   ];
 
