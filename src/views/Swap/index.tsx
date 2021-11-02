@@ -1,41 +1,33 @@
-import { useWeb3React, } from '@web3-react/core'
-import { InjectedConnector } from '@web3-react/injected-connector';
-import Web3 from 'web3';
-import React from 'react';
-import { useState } from 'react';
-import {BigNumber} from 'bignumber.js';
+import { useWeb3React } from '@web3-react/core'
+import React, { useState } from 'react';
 import NaviMenu from '../NaviMenu';
-import ERC20 from '../../component/ERC20';
+
+import {Card,CardBody,/*CardFooter,*/CardHeader} from '@yuki_kurosawa/uikit';
+import {WalletInfo} from '../../context/wallet';
+import {DAPP, injected, useEagerConnect,useInactiveListener} from '../../context/hooks';
+import { DappSupport } from '../../context/dappsupport';
 
 const Home: React.FC = () => {
-	     
-    var [balance,setBalance]=useState<string>("");
-    const { activate, account, library, active, chainId, deactivate } = useWeb3React();
-
-    var connector=new InjectedConnector({
-        supportedChainIds: [1,3,4,5,42,56,97]
-    });
     
-    function connect(){
-        
-        activate(connector).then(()=>{
-            if(active && account != null)
-            {
-                console.log(account);
-                var web3:Web3=library;         
-                web3.eth.getBalance(account?.toString()).then((s)=>{
-                    var _balance=new BigNumber(s).div(new BigNumber("1000000000000000000")).toFixed(4); 
-                    var wei=([56,97].indexOf(chainId??1)>-1)?" BNB":" ETH"
-                    setBalance(_balance+wei);
-                });                
-            }
-        });        
-    };
+    // handle logic to recognize the connector currently being activated
+    const [activatingConnector, setActivatingConnector] = React.useState<any>();
+    
 
-    function disconnect(){
-        deactivate();
-        setBalance("");
-    }
+    React.useEffect(() => {
+        var connector=injected;
+
+        if (activatingConnector && activatingConnector === connector) {
+            setActivatingConnector(undefined)
+        }
+    }, [activatingConnector]);
+
+    // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+    const triedEager = useEagerConnect()
+
+    // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+    useInactiveListener(!triedEager || !!activatingConnector)
+
+    /*
 
     function send(){
         var web3:Web3=library; 
@@ -52,7 +44,7 @@ const Home: React.FC = () => {
         //const {alert}=window;     
         console.log(usdt);
         //alert(usdt.balanceOf(account?.toString()));
-        var data=usdt.methods.transfer(account?.toString(),'10000000000000000');
+        var data=usdt.methods.transfer(account?.toString(),'1000000000000000000');
         data.send({
             from:account?.toString(),
             to:account?.toString()
@@ -66,7 +58,7 @@ const Home: React.FC = () => {
         //const {alert}=window;     
         console.log(usdt);
         //alert(usdt.balanceOf(account?.toString()));
-        var data=usdt.methods.approve('0x0ff64DEB206Dd1B147b48DA4C2ace73FaBBcc690','10000000000000000');
+        var data=usdt.methods.approve('0x0ff64DEB206Dd1B147b48DA4C2ace73FaBBcc690','1000000000000000000');
         data.send({
             from:account?.toString(),
             to:account?.toString()
@@ -78,17 +70,46 @@ const Home: React.FC = () => {
             to:account?.toString()
         });  
     }
+    */
 	
+    const { activate, account, library, chainId, deactivate,active } = useWeb3React();
+    const [connected,setConnected]=useState(false);
+
     return (
         <div>
            <NaviMenu>
-                <span>{account}={balance}</span>
-                <br/>
-                <button onClick={connect}>Connect</button><br/>
-                <button onClick={disconnect}>Disconnect</button><br/>           
-                <button onClick={send}>SendBNB</button><br/>   
-                <button onClick={sendu}>SendUSDT</button><br/>     
-                <button onClick={approve}>ApproveUSDT</button><br/>      
+               <DAPP.Provider value={{connected,setConnected}}>
+                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%" }}>
+                        <CardHeader variant="blue">
+                            Wallet Info
+                        </CardHeader>
+                        <CardBody style={{/*height:"200px"*/}}>  
+                            <WalletInfo connector={injected} activate={activate} 
+                            account={account} library={library} chainId={chainId} deactivate={deactivate} active={active}>
+                            </WalletInfo>
+                        </CardBody>
+                    </Card>
+                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%", display:"none" }}>
+                        <CardHeader variant="blue">
+                            Exchange
+                        </CardHeader>
+                        <CardBody style={{height:"100px"}}>
+                            Under Construction
+                        </CardBody>
+                    </Card>
+                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%" }}>
+                        <CardHeader variant="blue">
+                            Support This Project
+                        </CardHeader>
+                        <CardBody style={{height:"500px"}}>
+                            {/* <button onClick={send}>SendBNB</button><br/>   
+                            <button onClick={sendu}>SendUSDT</button><br/>     
+                            <button onClick={approve}>ApproveUSDT</button><br/>   */}
+                            <DappSupport connector={injected} account={account} chainId={chainId} library={library}>                                
+                            </DappSupport>
+                        </CardBody>
+                    </Card>       
+                </DAPP.Provider>    
 		   </NaviMenu>
         </div>
     )

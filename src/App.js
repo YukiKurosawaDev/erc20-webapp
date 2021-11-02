@@ -3,7 +3,6 @@ import './App.css';
 import { ResetCSS } from '@yuki_kurosawa/uikit'
 import { HashRouter,Route } from 'react-router-dom';
 import GlobalStyle from './style/Global.ts';
-import history from './routerHistory.ts';
 import Web3 from 'web3';
 import { Web3ReactProvider } from '@web3-react/core'
 const Home = lazy(() => import('./views/Home/index.tsx'));
@@ -20,7 +19,7 @@ function getLibrary(provider) {
 
 function App({ Component, pageProps }) {
   return (
-    <HashRouter history={history}>
+    <HashRouter>
       <ResetCSS></ResetCSS>
       <GlobalStyle></GlobalStyle>
       <Suspense fallback={<div></div>}>

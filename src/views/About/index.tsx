@@ -7,8 +7,8 @@ const Home: React.FC = () => {
     return (
         <div>
            <NaviMenu>  
-               <Text fontSize="30px" bold>Contact Us</Text>
-                <Text fontSize="20px">
+               <Text fontSize="25px" bold>Contact Us</Text>
+                <Text>
                     If you have any questions or ideas for this project, send them to us with the methods below. <br/>
                     <br/>
                     <br/>

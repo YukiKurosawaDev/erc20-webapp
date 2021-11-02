@@ -16,6 +16,8 @@ const NaviMenu: React.FC<object> = ({children}) => {
         marginTop:'2.5%',
     };
 
+    
+
     return (
         <div>
             <Menu isDark={false} toggleTheme={noop} langs={languageList} setLang={noop} currentLang="EN" links={menus}>

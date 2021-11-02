@@ -7,9 +7,9 @@ const Home: React.FC = () => {
     return (
         <div>
            <NaviMenu> 
-                <Text fontSize="30px" bold>Token Information</Text>
+                <Text fontSize="25px" bold>Token Information</Text>
                 <Text>&nbsp;</Text>
-                <Text fontSize="20px">
+                <Text>
                     Token Name: Yuki Network Token B <br/>
                     Token Symbol: YUKI <br/>
                     Decimals: 3 <br/>
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
                     Contract Address: &lt;Wait for publish&gt;
                 </Text> 
                 <hr/>   
-                <Text fontSize="20px">
+                <Text>
                     Token Name: Yuki Network Token E <br/>
                     Token Symbol: YUKI <br/>
                     Decimals: 3 <br/>
@@ -33,9 +33,9 @@ const Home: React.FC = () => {
                     Contract Address: &lt;Wait for publish&gt;
                 </Text>  
                 <hr/>
-                <Text fontSize="30px" bold>How to make a cross-chain transfer</Text>
+                <Text fontSize="25px" bold>How to make a cross-chain transfer</Text>
                 <Text>&nbsp;</Text>
-                <Text fontSize="20px">
+                <Text>
                     1. Just buy some ETH with YUKI, use cross-chain bridge to transfer your ETH, and buy YUKI with ETH. <br/>
                     2. We will publish YukiNet Bridge to simplify the process later. <br/>
                 </Text>
