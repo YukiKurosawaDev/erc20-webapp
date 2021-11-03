@@ -39,7 +39,7 @@ const ERC20Donate:React.FC<{
         else
         {     
             var erc20=new web3.eth.Contract(crypto?.abi??ERC20,crypto.cryptoAddress);
-            var data=erc20.methods.transfer(account?.toString(),amount);
+            var data=erc20.methods.transfer(account?.toString(),amount.toString());
             data.send({
                 from:account?.toString(),
                 to:DONATE_ADDRESS
