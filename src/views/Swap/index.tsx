@@ -74,12 +74,13 @@ const Home: React.FC = () => {
 	
     const { activate, account, library, chainId, deactivate,active } = useWeb3React();
     const [connected,setConnected]=useState(false);
+    //const account="0x0000000000000000000000000000000000000000";
 
     return (
         <div>
            <NaviMenu>
                <DAPP.Provider value={{connected,setConnected}}>
-                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%" }}>
+                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
                         <CardHeader variant="blue">
                             Wallet Info
                         </CardHeader>
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
                             Under Construction
                         </CardBody>
                     </Card>
-                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%" }}>
+                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
                         <CardHeader variant="blue">
                             Support This Project
                         </CardHeader>

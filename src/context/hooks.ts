@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { InjectedConnector } from '@web3-react/injected-connector';
+import { BSC_MainNet, BSC_TestNet, ETH_MainNet, ETH_Rinkeby } from './chainInfo';
 
 var injected =new InjectedConnector({
-    supportedChainIds: [1,3,4,5,42,56,97]
+    supportedChainIds: [ETH_MainNet.chainId,ETH_Rinkeby.chainId,BSC_MainNet.chainId,BSC_TestNet.chainId]
 });
 
 export function useEagerConnect() {

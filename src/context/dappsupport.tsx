@@ -1,16 +1,13 @@
-import Web3 from 'web3';
+
 import React from 'react';
 import { HTMLAttributes } from "react";
 import { SpaceProps } from "styled-system";
 
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-import {BigNumber} from 'bignumber.js';
-
-import {Text,Button} from '@yuki_kurosawa/uikit';
-
-import ERC20 from '../component/ERC20';
 import { DAPP } from './hooks';
+import { GetChainInfo } from './chainInfo';
+import ERC20Donate from '../component/ERC20Donate';
 
 export interface DappSupportProps extends SpaceProps, HTMLAttributes<HTMLDivElement> {
     connector:InjectedConnector,
@@ -21,14 +18,20 @@ export interface DappSupportProps extends SpaceProps, HTMLAttributes<HTMLDivElem
 
 const DappSupport:React.FC<DappSupportProps> = (p) => {
 
+    const {library,chainId,account} = p;
     var {connected}=React.useContext(DAPP);
+    const chain=GetChainInfo(chainId??0);
         
     return (
-        <div>
+        <div style={{padding:"3px"}}>
             {
                 connected && 
                 <>
-                <Text>{p.account}</Text>
+                {
+                    chain?.cryptos.map((crypto)=>{
+                        return <><ERC20Donate key={crypto.cryptoAddress} crypto={crypto} web3={library} account={account}></ERC20Donate><br/></>
+                    })
+                }
                 </>
             }                    
         </div>
