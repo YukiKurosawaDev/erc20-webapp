@@ -28,8 +28,10 @@ const DappSupport:React.FC<DappSupportProps> = (p) => {
                 connected && 
                 <>
                 {
-                    chain?.cryptos.map((crypto)=>{
-                        return <><ERC20Donate key={crypto.cryptoAddress} crypto={crypto} web3={library} account={account}></ERC20Donate><br/></>
+                    chain?.cryptos.map((crypto,index)=>{
+                        return <div key={index}>
+                            <ERC20Donate key={crypto.cryptoAddress+index.toString()} crypto={crypto} web3={library} account={account} chainId={chainId??0}></ERC20Donate><br/>
+                            </div>
                     })
                 }
                 </>
