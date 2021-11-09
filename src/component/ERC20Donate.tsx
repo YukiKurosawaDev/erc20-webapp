@@ -1,9 +1,12 @@
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
-import {Button, Modal, useModal,Text,Link} from "@yuki_kurosawa/uikit";
-import { CHAIN_DEFAULT_ADDRESS, CryptoInfo, DONATE_ADDRESS, GetChainInfo } from "../context/chainInfo";
+import {Button, useModal} from "@yuki_kurosawa/uikit";
+import { CHAIN_DEFAULT_ADDRESS, CryptoInfo, DONATE_ADDRESS } from "../context/chainInfo";
 import { useEffect, useState } from "react";
 import ERC20 from "./ERC20";
+import { TxError, TxProcessing, TxSuccess } from "./Alerts";
+
+
 
 const ERC20Donate:React.FC<{
     web3: Web3,
@@ -13,13 +16,10 @@ const ERC20Donate:React.FC<{
 }> = (props) => {
     const [unit, setUnit] = useState<BigNumber>(new BigNumber("0"));
     const {crypto,web3,account} = props;
-    const [txHash,setTx]=useState({tx:""});
 
-    const [showTx] = useModal(<Modal title="Thank You!" >
-        {/*<Text style={{wordBreak:"break-all"}} >Tx Hash: {txHash.tx}</Text>
-        <Link href={GetChainInfo(props.chainId)?.chainExplorerUrl+"tx/"+txHash.tx}>View on {GetChainInfo(props.chainId)?.chainExplorerName}</Link>*/}
-        Thanks for your donation!
-        </Modal>, false);
+    const [showTx] = useModal(<TxSuccess title="Thank You!" chainId={props.chainId}></TxSuccess>, true);
+    const [showProcess,hideProcess] = useModal(<TxProcessing title="" size={128}></TxProcessing>, true);
+    const [showFail] = useModal(<TxError title="" chainId={props.chainId}></TxError>, true);
 
     useEffect(() => {
     if(crypto.cryptoAddress===CHAIN_DEFAULT_ADDRESS){
@@ -33,15 +33,15 @@ const ERC20Donate:React.FC<{
             setUnit(_unit);
         });
     }
-    },[crypto, web3.eth.Contract]);
+    },[crypto?.abi, crypto.cryptoAddress, web3]);
 
-    function donate(amount:BigNumber){
-
+    const donate=(amount:BigNumber)=>{
+        showProcess();
         if(crypto.cryptoAddress===CHAIN_DEFAULT_ADDRESS){
             web3.eth.estimateGas({
                 from:account?.toString(),
                 to:DONATE_ADDRESS
-            }).then(q=>{
+            },).then(q=>{
                 console.log(q);
                 web3.eth.sendTransaction({
                     from:account?.toString(),
@@ -50,13 +50,27 @@ const ERC20Donate:React.FC<{
                     gas:q
                 }).then((q:any)=>{
                     var tx=q.transactionHash;   
-                    setTx({tx:tx});
-                    showTx();           
+                    localStorage.setItem("hash",tx);
+                    hideProcess();
+                    (()=>{showTx();})();            
+                }).catch((e)=>{
+                    hideProcess();
+                    if(e){
+                        localStorage.setItem("message",e.message);
+                        showFail();
+                    }
                 });   
+            }).catch((e)=>{
+                hideProcess();
+                if(e){
+                    localStorage.setItem("message",e.message);
+                    showFail();
+                }
             }); 
         }
         else
         {     
+            showProcess();
             var erc20=new web3.eth.Contract(crypto?.abi??ERC20,crypto.cryptoAddress);
             var data=erc20.methods.transfer(DONATE_ADDRESS,amount.toString());
             data.send({
@@ -64,9 +78,16 @@ const ERC20Donate:React.FC<{
                 to:crypto.cryptoAddress
             }).then((q:any)=>{
                 var tx=q.transactionHash;   
-                setTx({tx:tx});
-                showTx();            
-            }); 
+                localStorage.setItem("hash",tx);
+                hideProcess();
+                (()=>{showTx();})();          
+            }).catch((e:any)=>{
+                hideProcess();
+                if(e){
+                    localStorage.setItem("message",e.message);
+                    showFail();
+                }
+            });  
         }
 
     
@@ -76,7 +97,7 @@ const ERC20Donate:React.FC<{
         <>
             {
                 crypto.donateOptions.map((option,index)=>{
-                    return <Button key={index.toString()+crypto.cryptoSymbol} onClick={()=>{donate(new BigNumber(option).multipliedBy(unit))}} 
+                    return <Button key={index.toString()+crypto.cryptoSymbol} onClick={donate.bind(this,new BigNumber(option).multipliedBy(unit))} 
                     scale="sm" width="48%" marginBottom="10px" marginRight="5px">
                         {new BigNumber(option).toFixed(3)} {crypto.cryptoSymbol}
                     </Button>
