@@ -1,12 +1,13 @@
 import React from 'react';
 import NaviMenu from '../NaviMenu'
-import {Text} from '@yuki_kurosawa/uikit';
+import {Text,Link} from '@yuki_kurosawa/uikit';
 
 const Home: React.FC = () => {
 	  
     return (
         <div>
            <NaviMenu> 
+                <Link href="/WhitePaper.pdf">White Paper (Full Version)</Link><br/>
                 <Text fontSize="25px" bold>Token Information</Text>
                 <Text>&nbsp;</Text>
                 <Text>
