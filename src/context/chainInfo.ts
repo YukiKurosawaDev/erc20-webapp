@@ -55,7 +55,7 @@ const BSC_MainNet: ChainInfo = {
     chainId : 56,
     chainName: "BSC MainNet",
     chainExplorerUrl: "https://bscscan.com/",
-    chainExplorerName: "BSCscan",
+    chainExplorerName: "BscScan",
     cryptos: [
         {
             cryptoName: "BNB",
@@ -93,7 +93,7 @@ const BSC_TestNet: ChainInfo = {
     chainId : 97,
     chainName: "BSC TestNet",
     chainExplorerUrl: "https://testnet.bscscan.com/",
-    chainExplorerName: "BSCscan",
+    chainExplorerName: "BscScan",
     cryptos: [
         {
             cryptoName: "BNB",
