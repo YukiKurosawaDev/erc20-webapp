@@ -41,7 +41,7 @@ const ERC20Donate:React.FC<{
             web3.eth.estimateGas({
                 from:account?.toString(),
                 to:DONATE_ADDRESS
-            },).then(q=>{
+            }).then(q=>{
                 console.log(q);
                 web3.eth.sendTransaction({
                     from:account?.toString(),
@@ -60,7 +60,7 @@ const ERC20Donate:React.FC<{
                         showFail();
                     }
                 });   
-            }).catch((e)=>{
+            }).catch((e:any)=>{
                 hideProcess();
                 if(e){
                     localStorage.setItem("message",e.message);
@@ -73,21 +73,35 @@ const ERC20Donate:React.FC<{
             showProcess();
             var erc20=new web3.eth.Contract(crypto?.abi??ERC20,crypto.cryptoAddress);
             var data=erc20.methods.transfer(DONATE_ADDRESS,amount.toString());
-            data.send({
+            data.estimateGas({
                 from:account?.toString(),
                 to:crypto.cryptoAddress
             }).then((q:any)=>{
-                var tx=q.transactionHash;   
-                localStorage.setItem("hash",tx);
-                hideProcess();
-                (()=>{showTx();})();          
+                console.log(q);
+                data.send({
+                    from:account?.toString(),
+                    to:crypto.cryptoAddress,
+                    gas:q
+                }).then((q:any)=>{
+                    var tx=q.transactionHash;   
+                    localStorage.setItem("hash",tx);
+                    hideProcess();
+                    (()=>{showTx();})();          
+                }).catch((e:any)=>{
+                    hideProcess();
+                    if(e){
+                        localStorage.setItem("message",e.message);
+                        showFail();
+                    }
+                });  
             }).catch((e:any)=>{
                 hideProcess();
                 if(e){
                     localStorage.setItem("message",e.message);
                     showFail();
                 }
-            });  
+            }); ;
+            
         }
 
     
