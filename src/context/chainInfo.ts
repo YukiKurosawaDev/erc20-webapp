@@ -30,7 +30,21 @@ const ETH_MainNet: ChainInfo = {
             cryptoAddress: CHAIN_DEFAULT_ADDRESS,
             cryptoSymbol: "ETH",
             abi: undefined,
-            donateOptions:[]
+            donateOptions:["0.001","0.01","0.1","1"]
+        },
+        {
+            cryptoName: "BUSD",
+            cryptoAddress: "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
+            cryptoSymbol: "BUSD",
+            abi: undefined,
+            donateOptions:["4","40","400","4000"]
+        },
+        {
+            cryptoName: "USDT",
+            cryptoAddress: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            cryptoSymbol: "USDT",
+            abi: undefined,
+            donateOptions:["4","40","400","4000"]
         }
     ]
 }
@@ -46,7 +60,7 @@ const ETH_Rinkeby: ChainInfo = {
             cryptoAddress: CHAIN_DEFAULT_ADDRESS,
             cryptoSymbol: "ETH",
             abi: undefined,
-            donateOptions:[]
+            donateOptions:["0.001","0.01","0.1","1"]
         }
     ]
 }

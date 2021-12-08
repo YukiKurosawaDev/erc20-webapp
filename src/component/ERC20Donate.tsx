@@ -1,11 +1,11 @@
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
 import {Button, useModal} from "@yuki_kurosawa/uikit";
-import { CHAIN_DEFAULT_ADDRESS, CryptoInfo, DONATE_ADDRESS } from "../context/chainInfo";
-import { useEffect, useState } from "react";
+import { CHAIN_DEFAULT_ADDRESS, CryptoInfo, DONATE_ADDRESS, GetChainInfo } from "../context/chainInfo";
+import { useEffect, useRef, useState } from "react";
 import ERC20 from "./ERC20";
 import { TxError, TxProcessing, TxSuccess } from "./Alerts";
-
+import axios from "axios";
 
 
 const ERC20Donate:React.FC<{
@@ -21,6 +21,10 @@ const ERC20Donate:React.FC<{
     const [showProcess,hideProcess] = useModal(<TxProcessing title="" size={128}></TxProcessing>, true);
     const [showFail] = useModal(<TxError title="" chainId={props.chainId}></TxError>, true);
 
+    const [options,setOptions]=useState(crypto.donateOptions);
+    var priceTimer: any =useRef(null);
+    var priceNotSet=useRef(true);
+
     useEffect(() => {
     if(crypto.cryptoAddress===CHAIN_DEFAULT_ADDRESS){
         var _unit=new BigNumber(10).pow(18);
@@ -34,6 +38,40 @@ const ERC20Donate:React.FC<{
         });
     }
     },[crypto?.abi, crypto.cryptoAddress, web3]);
+
+    useEffect(() => {
+        if(priceTimer.current===null||priceNotSet.current){
+            var time=priceNotSet.current?0:5000;
+            priceNotSet.current=false;
+            priceTimer.current=setTimeout(()=>{
+                var chainCrypto=GetChainInfo(props.chainId)?.cryptos[0];
+
+                if(chainCrypto?.cryptoSymbol===crypto.cryptoSymbol){
+                    priceTimer.current=null;
+                    return;
+                }
+
+                if(chainCrypto?.cryptoSymbol==="W"+crypto.cryptoSymbol){
+                    priceTimer.current=null;
+                    return;
+                }
+
+                axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=`+chainCrypto?.cryptoSymbol+crypto.cryptoSymbol).then((res)=>{
+                    var price=new BigNumber(res.data.price);
+                    var no:string[]=[];
+                    chainCrypto?.donateOptions.map((o,i)=>{
+                        no.push(new BigNumber(o).times(price).toString());                        
+                        return null;
+                    });
+                    setOptions(no);
+                    priceTimer.current=null;
+                }).catch((err)=>{
+                    //console.log(err)
+                });
+            },time);
+        }       
+
+    });
 
     const donate=(amount:BigNumber)=>{
         showProcess();
@@ -110,7 +148,7 @@ const ERC20Donate:React.FC<{
     return (
         <>
             {
-                crypto.donateOptions.map((option,index)=>{
+                options.map((option,index)=>{
                     return <Button key={index.toString()+crypto.cryptoSymbol} onClick={donate.bind(this,new BigNumber(option).multipliedBy(unit))} 
                     scale="sm" width="48%" marginBottom="10px" marginRight="5px">
                         {new BigNumber(option).toFixed(3)} {crypto.cryptoSymbol}
