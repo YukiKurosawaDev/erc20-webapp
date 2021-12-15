@@ -7,7 +7,7 @@ import {WalletInfo} from '../../context/wallet';
 import {DAPP, injected, useEagerConnect,useInactiveListener} from '../../context/hooks';
 import { DappSupport } from '../../context/dappsupport';
 
-const Home: React.FC = () => {
+const Donate: React.FC = () => {
     
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = React.useState<any>();
@@ -116,4 +116,4 @@ const Home: React.FC = () => {
     )
 };
 
-export default Home;
+export default Donate;

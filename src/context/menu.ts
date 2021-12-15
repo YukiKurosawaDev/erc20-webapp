@@ -6,20 +6,20 @@ var menus:MenuEntry[]=[
       icon: 'HomeIcon',
       href: '/',
     },
-    {
+    /*{
       label: 'Characters',
       icon:'GroupsIcon',
       href: '/chara'
-    },
+    },*/
     {
       label: 'Info',
       icon: 'InfoIcon',
       href: '/Info',
     },
     {
-      label: 'Trade',
+      label: 'Donate',
       icon: 'TradeIcon',
-      href: '/swap',
+      href: '/donate',
     }, 
     {
       label: 'Contacts',

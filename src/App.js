@@ -8,7 +8,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 const Home = lazy(() => import('./views/Home/index.tsx'));
 const Characters = lazy(() => import('./views/Characters/index.tsx'));
 const Info = lazy(() => import('./views/Info/index.tsx'));
-const Swap = lazy(() => import('./views/Swap/index.tsx'));
+const Donate = lazy(() => import('./views/Donate/index.tsx'));
 const About = lazy(() => import('./views/About/index.tsx'));
 
 
@@ -32,8 +32,8 @@ function App({ Component, pageProps }) {
         <Route path="/info" exact>
           <Info />
         </Route>
-        <Route path="/swap" exact>
-          <Swap />
+        <Route path="/donate" exact>
+          <Donate />
         </Route>
         <Route path="/about" exact>
           <About />

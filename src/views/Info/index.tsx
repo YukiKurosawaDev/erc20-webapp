@@ -2,7 +2,7 @@ import React from 'react';
 import NaviMenu from '../NaviMenu'
 import {Text,Link} from '@yuki_kurosawa/uikit';
 
-const Home: React.FC = () => {
+const Info: React.FC = () => {
 	  
     return (
         <div>
@@ -45,4 +45,4 @@ const Home: React.FC = () => {
     )
 };
 
-export default Home;
+export default Info;

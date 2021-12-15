@@ -1,7 +1,7 @@
 import React from 'react';
 import NaviMenu from '../NaviMenu'
 
-const Home: React.FC = () => {
+const Chara: React.FC = () => {
 	  
     return (
         <div>
@@ -11,4 +11,4 @@ const Home: React.FC = () => {
     )
 };
 
-export default Home;
+export default Chara;
