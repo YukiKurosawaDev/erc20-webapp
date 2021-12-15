@@ -2,10 +2,11 @@ import { useWeb3React } from '@web3-react/core'
 import React, { useState } from 'react';
 import NaviMenu from '../NaviMenu';
 
-import {Card,CardBody,/*CardFooter,*/CardHeader} from '@yuki_kurosawa/uikit';
-import {WalletInfo} from '../../context/wallet';
-import {DAPP, injected, useEagerConnect,useInactiveListener} from '../../context/hooks';
+import { Card, CardBody, /*CardFooter,*/ CardHeader} from '@yuki_kurosawa/uikit';
+import { WalletInfo } from '../../context/wallet';
+import { DAPP, injected, useEagerConnect, useInactiveListener} from '../../context/hooks';
 import { DappSupport } from '../../context/dappsupport';
+import { DAppWrapper } from '../DAppWrapper/Wrapper';
 
 const Donate: React.FC = () => {
     
@@ -80,37 +81,39 @@ const Donate: React.FC = () => {
         <div>
            <NaviMenu>
                <DAPP.Provider value={{connected,setConnected}}>
-                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
-                        <CardHeader variant="blue">
-                            Wallet Info
-                        </CardHeader>
-                        <CardBody style={{/*height:"200px"*/}}>  
-                            <WalletInfo connector={injected} activate={activate} 
-                            account={account} library={library} chainId={chainId} deactivate={deactivate} active={active}>
-                            </WalletInfo>
-                        </CardBody>
-                    </Card>
-                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%", display:"none" }}>
-                        <CardHeader variant="blue">
-                            Exchange
-                        </CardHeader>
-                        <CardBody style={{height:"100px"}}>
-                            Under Construction
-                        </CardBody>
-                    </Card>
-                    <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
-                        <CardHeader variant="blue">
-                            Support This Project
-                        </CardHeader>
-                        <CardBody style={{height:"500px"}}>
-                            {/* <button onClick={send}>SendBNB</button><br/>   
-                            <button onClick={sendu}>SendUSDT</button><br/>     
-                            <button onClick={approve}>ApproveUSDT</button><br/>   */}
-                            <DappSupport connector={injected} account={account} chainId={chainId} library={library}>                                
-                            </DappSupport>
-                        </CardBody>
-                    </Card>       
-                </DAPP.Provider>    
+                    <DAppWrapper>
+                        <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
+                            <CardHeader variant="blue">
+                                Wallet Info
+                            </CardHeader>
+                            <CardBody style={{/*height:"200px"*/}}>  
+                                <WalletInfo connector={injected} activate={activate} 
+                                account={account} library={library} chainId={chainId} deactivate={deactivate} active={active}>
+                                </WalletInfo>
+                            </CardBody>
+                        </Card>
+                        <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "90%", display:"none" }}>
+                            <CardHeader variant="blue">
+                                Exchange
+                            </CardHeader>
+                            <CardBody style={{height:"100px"}}>
+                                Under Construction
+                            </CardBody>
+                        </Card>
+                        <Card style={{ marginLeft:"auto", marginRight:"auto", marginBottom:"10px", width: "95%" }}>
+                            <CardHeader variant="blue">
+                                Support This Project
+                            </CardHeader>
+                            <CardBody style={{height:"500px"}}>
+                                {/* <button onClick={send}>SendBNB</button><br/>   
+                                <button onClick={sendu}>SendUSDT</button><br/>     
+                                <button onClick={approve}>ApproveUSDT</button><br/>   */}
+                                <DappSupport connector={injected} account={account} chainId={chainId} library={library}>                                
+                                </DappSupport>
+                            </CardBody>
+                        </Card>
+                    </DAppWrapper>       
+                </DAPP.Provider>                  
 		   </NaviMenu>
         </div>
     )
