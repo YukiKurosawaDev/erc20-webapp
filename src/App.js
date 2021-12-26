@@ -10,7 +10,7 @@ const Characters = lazy(() => import('./views/Characters/index.tsx'));
 const Info = lazy(() => import('./views/Info/index.tsx'));
 const Donate = lazy(() => import('./views/Donate/index.tsx'));
 const About = lazy(() => import('./views/About/index.tsx'));
-
+const RoadMap = lazy(() => import('./views/RoadMap/index.tsx'));
 
 function getLibrary(provider) {
   return new Web3(provider)
@@ -31,6 +31,9 @@ function App({ Component, pageProps }) {
         </Route>
         <Route path="/info" exact>
           <Info />
+        </Route>
+        <Route path="/roadmap" exact>
+          <RoadMap />
         </Route>
         <Route path="/donate" exact>
           <Donate />

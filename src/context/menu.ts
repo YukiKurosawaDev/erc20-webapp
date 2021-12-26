@@ -17,6 +17,11 @@ var menus:MenuEntry[]=[
       href: '/Info',
     },
     {
+      label: 'RoadMap',
+      icon: 'InfoIcon',
+      href: '/RoadMap',
+    },
+    {
       label: 'Donate',
       icon: 'TradeIcon',
       href: '/donate',
