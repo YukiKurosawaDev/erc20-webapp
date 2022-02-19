@@ -14,7 +14,7 @@ const Info: React.FC = () => {
                     Token Name: Yuki Network Token <br/>
                     Token Symbol: YUKI <br/>
                     Decimals: 3 <br/>
-                    Chain: Binance Smart Chain <br/>
+                    Chain: BNB Smart Chain <br/>
                     Initial Supply: 100,000 <br/>
                     Maximum Supply: 1,000,000 <br/>
                     Contract Address: &lt;Wait for publish&gt;
